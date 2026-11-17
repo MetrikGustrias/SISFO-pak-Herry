@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Guru;
 use App\Models\Kelas;
-use App\Models\Mapel;
-use App\Models\Nilai;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -95,54 +93,10 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Sunda No. 25, Bandung',
         ]);
 
-        // 4. Seed Mapel
-        $mapel1 = Mapel::create([
-            'kode_mapel' => 'MP-PWPB',
-            'nama_mapel' => 'Pemrograman Web & Perangkat Bergerak',
-            'kkm' => 75,
-        ]);
-
-        $mapel2 = Mapel::create([
-            'kode_mapel' => 'MP-PBO',
-            'nama_mapel' => 'Pemrograman Berorientasi Objek',
-            'kkm' => 75,
-        ]);
-
-        $mapel3 = Mapel::create([
-            'kode_mapel' => 'MP-BASDAT',
-            'nama_mapel' => 'Basis Data',
-            'kkm' => 78,
-        ]);
-
-        // 5. Seed Nilai
-        Nilai::create([
-            'siswa_id' => $siswa1->id,
-            'mapel_id' => $mapel1->id,
-            'nilai_tugas' => 85,
-            'nilai_uts' => 80,
-            'nilai_uas' => 90,
-            'nilai_akhir' => 85.50,
-            'keterangan' => 'Lulus',
-        ]);
-
-        Nilai::create([
-            'siswa_id' => $siswa1->id,
-            'mapel_id' => $mapel3->id,
-            'nilai_tugas' => 90,
-            'nilai_uts' => 88,
-            'nilai_uas' => 92,
-            'nilai_akhir' => 90.20,
-            'keterangan' => 'Lulus',
-        ]);
-
-        Nilai::create([
-            'siswa_id' => $siswa2->id,
-            'mapel_id' => $mapel1->id,
-            'nilai_tugas' => 70,
-            'nilai_uts' => 65,
-            'nilai_uas' => 70,
-            'nilai_akhir' => 68.50,
-            'keterangan' => 'Tidak Lulus',
+        // 4. Seed Mapel & 5. Seed Nilai (aman dijalankan ulang)
+        $this->call([
+            MapelSeeder::class,
+            NilaiSeeder::class,
         ]);
     }
 }
